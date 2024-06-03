@@ -40,4 +40,25 @@ public class AgenteDAO {
       System.out.println("Error query select agente: " + e.getMessage());
     }
   }
+
+  public void inserirAgente(String nomeUsuario, String nomePessoa, String senha, String CPF) {
+    String sql = "INSERT INTO agente (nomeUsuario, nomePessoa, senha, CPF) VALUES (?, ?, ?, ?)";
+    try {
+      preparedStatement = connection.prepareStatement(sql);
+
+      preparedStatement.setString(1, nomeUsuario);
+      preparedStatement.setString(2, nomePessoa);
+      preparedStatement.setString(3, senha);
+      preparedStatement.setString(4, CPF);
+
+      preparedStatement.execute();
+
+      preparedStatement.close();
+
+      System.out.println("Agente salvo com sucesso!");
+    } catch (SQLException error) {
+      System.out.println("Erro: " + error.getMessage());
+    }
+  }
+
 }

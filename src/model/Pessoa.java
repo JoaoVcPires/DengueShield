@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Pessoa {// classe pai de agente e proprietário
+public abstract class Pessoa {
     private String nome;
     private String cpf;
     private String nomeUsuario;

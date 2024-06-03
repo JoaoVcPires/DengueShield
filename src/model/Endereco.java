@@ -3,20 +3,28 @@ package model;
 import java.util.Scanner;
 
 public class Endereco {
+    private int idEndereco;
     private String logradouro;
     private int numCasa;
-    private int quantCaso;
-    private Proprietario dono;
-    private boolean focoDengue; // atributo que ao ser true, soma mais 1 caso no bairro desse endereço
+    private Proprietario proprietario;
+    private boolean focoDengue;
 
-    public Endereco(String logradouro, int numCasa, int quantCaso, Proprietario dono) {
+    public Endereco(int idEndereco, String logradouro, int numCasa, int quantCaso, Proprietario proprietario) {
+        this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.numCasa = numCasa;
-        this.quantCaso = quantCaso;
-        this.dono = dono;
+        this.proprietario = proprietario;
         this.focoDengue = false;
 
-        this.dono.addEndDono(this);
+        this.proprietario.addEndDono(this);
+    }
+
+    public int getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
     }
 
     public String getLogradouro() {
@@ -35,20 +43,12 @@ public class Endereco {
         this.numCasa = numCasa;
     }
 
-    public int getQuantCaso() {
-        return quantCaso;
+    public Proprietario getProprietario() {
+        return proprietario;
     }
 
-    public void setQuantCaso(int quantCaso) {
-        this.quantCaso = quantCaso;
-    }
-
-    public Proprietario getDono() {
-        return dono;
-    }
-
-    public void setDono(Proprietario dono) {
-        this.dono = dono;
+    public void setPropriet(Proprietario proprietario) {
+        this.proprietario = proprietario;
     }
 
     public boolean getfocoDengue() {
@@ -59,7 +59,7 @@ public class Endereco {
         this.focoDengue = x;
     }
 
-    public void alterarDados() {// função básica de alterar dados do objeto endereço
+    public void alterarDados() {
         Scanner sc = new Scanner(System.in);
         int op;
         System.out.println("Alterar informações do endereço");
@@ -86,11 +86,10 @@ public class Endereco {
         } while (op != 0);
     }
 
-    public void dadosEnd() {// imprimir dados do endereço, no momento não está sendo utilizado
+    public void dadosEnd() {
         System.out.println("Informações de endereço:");
         System.out.println("Logradouro: " + this.getLogradouro() + "   N° " + this.getNumCasa()
-                + "   Proprietario do imóvel: " + this.getDono().getNome());
-        System.out.println("Numero de casos registrados no local: " + this.getQuantCaso());
+                + "   Proprietario do imóvel: " + this.getProprietario().getNome());
     }
 
 }

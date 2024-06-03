@@ -3,13 +3,39 @@ package model;
 import java.util.ArrayList;
 
 public class Proprietario extends Pessoa {
+    private int idProprietario;
+    private Endereco endereco;
+
     private ArrayList<Endereco> listaEnd;
     private ArrayList<Denuncia> minhaDenuncias;
 
+    public Proprietario(String nome, String cpf, String nomeUsuario, String senha, int idProprietario,
+            Endereco endereco) {
+        super(nome, cpf, nomeUsuario, senha);
+        this.idProprietario = idProprietario;
+        this.endereco = endereco;
+    }
+
     public Proprietario(String nome, String cpf, String nomeUsuario, String senha) {
         super(nome, cpf, nomeUsuario, senha);
-        this.listaEnd = new ArrayList<>();// Lista de endereços desse proprietário
+        this.listaEnd = new ArrayList<>();
         this.minhaDenuncias = new ArrayList<>();
+    }
+
+    public int getIdProprietario() {
+        return idProprietario;
+    }
+
+    public void setIdProprietario(int idProprietario) {
+        this.idProprietario = idProprietario;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public ArrayList<Endereco> getListaEnd() {
@@ -21,14 +47,14 @@ public class Proprietario extends Pessoa {
     }
 
     public void addEndDono(Endereco myEnd) {
-        this.listaEnd.add(myEnd);// função de adicionar endereços na lista do proprietário
+        this.listaEnd.add(myEnd);
     }
 
-    public void addDenuncia(Denuncia y) {// função para adicionar denuncias no nome desse proprietario
+    public void addDenuncia(Denuncia y) {
         this.minhaDenuncias.add(y);
     }
 
-    public void consultarMeusEnd() {// função para mostrar os endereços desse proprietário
+    public void consultarMeusEnd() {
         System.out.println("Endereços de " + this.getNomeUsuario());
         for (Endereco g : listaEnd) {
             System.out.println(g.getLogradouro() + " " + g.getNumCasa());

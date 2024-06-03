@@ -1,6 +1,8 @@
 //import StatusDeDenuncia.SelectStatus;
 
 import DAO.AgenteDAO;
+import DAO.BairroDAO;
+import DAO.ProprietarioDAO;
 import model.*;
 
 public class App {
@@ -43,7 +45,20 @@ public class App {
 
         AgenteDAO agenteDAO = new AgenteDAO();
 
-        agenteDAO.buscarAgentes();
+        // agenteDAO.buscarAgentes();
 
+        // BairroDAO bairroDAO = new BairroDAO();
+        // bairroDAO.buscarBairro();
+
+        // ProprietarioDAO proprietarioDAO = new ProprietarioDAO();
+
+        // proprietarioDAO.inserirProprietario("gui123", "Guilherme", "123",
+        // "123.456.789-10", 1);
+
+        // proprietarioDAO.buscaProprietario();
+
+        // agenteDAO.inserirAgente("ricardo", "Ricardo", "gui123", "123.654.981-81");
+
+        // agenteDAO.buscarAgentes();
     }
 }

@@ -2,21 +2,17 @@ package model;
 
 public class Caso {
     private Agente responsavel;
-    private String descCaso;
-    private Endereco endCaso;
+    private String descricao;
+    private Endereco enderecoDoCaso;
 
-    public Caso(String descCaso, Endereco endCaso, Agente responsavel) {
-        this.descCaso = descCaso;
-        this.endCaso = endCaso;
+    public Caso(String descricao, Endereco enderecoDoCaso, Agente responsavel) {
+        this.descricao = descricao;
+        this.enderecoDoCaso = enderecoDoCaso;
         this.responsavel = responsavel;
 
-        if (this.endCaso != null) {
-            endCaso.setfocoDengue(true);// ao criar um caso e informar seu endereço, o atributo
-            // de foco dengue desse endereço, automaticamento se torna verdadeiro (boleano,
-            // pois é possível
-            // apenas 1 caso por endereço)
-            this.responsavel.meusCasos(this);// meus casos é a função para adicionar o caso na lista de casos
-            // do responsável
+        if (this.enderecoDoCaso != null) {
+            enderecoDoCaso.setfocoDengue(true);
+            this.responsavel.meusCasos(this);
         }
     }
 
@@ -28,20 +24,20 @@ public class Caso {
         this.responsavel = responsavel;
     }
 
-    public String getDescCaso() {
-        return descCaso;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescCaso(String descCaso) {
-        this.descCaso = descCaso;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public Endereco getEndCaso() {
-        return endCaso;
+    public Endereco getEnderecoDoCaso() {
+        return enderecoDoCaso;
     }
 
-    public void setEndCaso(Endereco endCaso) {
-        this.endCaso = endCaso;
+    public void setEnderecoDoCaso(Endereco endCaso) {
+        this.enderecoDoCaso = endCaso;
     }
 
 }

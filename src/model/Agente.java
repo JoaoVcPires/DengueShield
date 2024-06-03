@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Agente extends Pessoa {
     private String status;
-    private ArrayList<Caso> casosAgente; // lista para exibir os casos que esse agente é responsável
+    private ArrayList<Caso> casosAgente;
 
     public Agente(String status, String nome, String cpf, String nomeUsuario, String senha) {
         super(nome, cpf, nomeUsuario, senha);
@@ -21,15 +21,14 @@ public class Agente extends Pessoa {
     }
 
     public void meusCasos(Caso c1) {
-        this.casosAgente.add(c1); // função para adicionar um caso na lista do agente - será usada na função
-        // de criar caso
+        this.casosAgente.add(c1);
     }
 
-    public void mostraCasos() {// mostra os casos desse agente
+    public void mostraCasos() {
         System.out.println("Casos registrado pelo usuario: " + this.getNomeUsuario());
         for (Caso i : casosAgente) {
-            System.out.println(i.getDescCaso() + "  Endereço: " + i.getEndCaso().getLogradouro() + " "
-                    + i.getEndCaso().getNumCasa());
+            System.out.println(i.getDescricao() + "  Endereço: " + i.getEnderecoDoCaso().getLogradouro() + " "
+                    + i.getEnderecoDoCaso().getNumCasa());
         }
     }
 
