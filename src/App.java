@@ -1,15 +1,12 @@
-//import StatusDeDenuncia.SelectStatus;
 
-import DAO.AgenteDAO;
-import DAO.BairroDAO;
-import DAO.ProprietarioDAO;
+import DAO.*;
 import model.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
         // Pesquisa pesq1 = new Pesquisa();
-        // Proprietario p1 = new Proprietario("João", "13794765931", "joaopires",
-        // "123456");
+        // Proprietario p1 = new Proprietario("João", "13794765931",
+        // "joaopires","123456");
         // Endereco end1 = new Endereco("Rua Mônaco", 1151, 0, p1);
         // Endereco end2 = new Endereco("R São João", 115, 0, p1);
         // Endereco end3 = new Endereco("Rua Maria Clara", 82, 0, p1);
@@ -43,7 +40,7 @@ public class App {
         // System.out.println();
         // d1.dadosDenuncia();
 
-        AgenteDAO agenteDAO = new AgenteDAO();
+        // AgenteDAO agenteDAO = new AgenteDAO();
 
         // agenteDAO.buscarAgentes();
 
@@ -60,5 +57,10 @@ public class App {
         // agenteDAO.inserirAgente("ricardo", "Ricardo", "gui123", "123.654.981-81");
 
         // agenteDAO.buscarAgentes();
+
+        DenunciaDAO d1 = new DenunciaDAO();
+
+        d1.insereDenuncia("Denuncia teste", 1, 1);
+        d1.consultaDenuncia();
     }
 }

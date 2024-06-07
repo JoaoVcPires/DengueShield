@@ -13,7 +13,7 @@ public class ProprietarioDAO {
     connection = BD.getConnection();
   }
 
-  public void buscaProprietario() {
+  public void buscarProprietario() {
     String sql = "SELECT * FROM proprietario";
 
     try {
