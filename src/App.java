@@ -1,66 +1,73 @@
+import java.util.Scanner;
 
-import DAO.*;
-import model.*;
+import Controller.BairroController;
+import DAO.EnderecoDAO;
 
 public class App {
+    private static BairroController bairroController;
+
+    public static void cadastroDeProprietario() {
+        bairroController = new BairroController();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nome: ");
+        String nome = scanner.next();
+
+        System.out.print("CPF: ");
+        String cpf = scanner.next();
+
+        System.out.print("Usuário: ");
+        String usuario = scanner.next();
+
+        System.out.print("Senha: ");
+        String senha = scanner.next();
+
+        System.out.println("Escolha o número do bairro que você reside: ");
+        bairroController.mostrarListaDeBairros();
+        int idBairro = scanner.nextInt();
+
+        System.out.print("Logradouro: ");
+        String logradouro = scanner.next();
+
+        System.out.print("Número da casa: ");
+        int numeroDaCasa = scanner.nextInt();
+
+    }
+
     public static void main(String[] args) throws Exception {
-        // Pesquisa pesq1 = new Pesquisa();
-        // Proprietario p1 = new Proprietario("João", "13794765931",
-        // "joaopires","123456");
-        // Endereco end1 = new Endereco("Rua Mônaco", 1151, 0, p1);
-        // Endereco end2 = new Endereco("R São João", 115, 0, p1);
-        // Endereco end3 = new Endereco("Rua Maria Clara", 82, 0, p1);
-        // Bairro b1 = new Bairro(pesq1, "Vila Industrial");
-        // Bairro b2 = new Bairro(pesq1, "Panorama");
-        // Agente ag1 = new Agente("Ativo", "Pedro", "1324543213", "PedroSaude",
-        // "123123123");
-        // b1.addEnd(end1);
-        // b2.addEnd(end2);
-        // b1.addEnd(end3);
-        // Caso c1 = new Caso("Água parada em pneus descartados no terreno", end1, ag1);
-        // Caso c2 = new Caso("Caso teste", end2, ag1);
-        // Caso c3 = new Caso("Calha com folhas", end3, ag1);
-        // b1.somarCasos();
-        // b2.somarCasos();
+        // int escolha = 0;
+        // Scanner scanner = new Scanner(System.in);
 
-        // ag1.mostraCasos();
+        // while (escolha != 4) {
+        // System.out.println("Escolha uma das opções abaixo");
+        // System.out.println("1 - Realizar cadastro");
+        // System.out.println("2 - Entrar como proprietário");
+        // System.out.println("3 - Entrar como agente");
+        // System.out.println("4 - Sair");
+        // escolha = scanner.nextInt();
 
-        // pesq1.exibirPesquisa();
-        // // end1.alterarDados();
-        // // c1.setDescCaso("pneus com agua");
+        // switch (escolha) {
+        // case 1:
+        // cadastroDeProprietario();
+        // break;
+        // case 2:
+        // System.out.println("Realizando login");
+        // break;
+        // case 3:
+        // System.out.println("Realizando login");
+        // break;
+        // case 4:
+        // System.out.println("Flw");
+        // break;
 
-        // Denuncia d1 = new Denuncia("Vi meu vizinho jogando pneus no terreno baudio",
-        // end3, p1);
-        // System.out.println();
-        // d1.dadosDenuncia();
-        // d1.setStatusDenuncia(StatusDeDenuncia.SelectStatus.ATENDENDO);
-        // System.out.println();
-        // d1.dadosDenuncia();
-        // d1.setStatusDenuncia(StatusDeDenuncia.SelectStatus.ATENDIDO);
-        // System.out.println();
-        // d1.dadosDenuncia();
+        // default:
+        // System.out.println("Opção inválida!");
+        // break;
+        // }
 
-        // AgenteDAO agenteDAO = new AgenteDAO();
+        // }
 
-        // agenteDAO.buscarAgentes();
-
-        // BairroDAO bairroDAO = new BairroDAO();
-        // bairroDAO.buscarBairro();
-
-        // ProprietarioDAO proprietarioDAO = new ProprietarioDAO();
-
-        // proprietarioDAO.inserirProprietario("gui123", "Guilherme", "123",
-        // "123.456.789-10", 1);
-
-        // proprietarioDAO.buscaProprietario();
-
-        // agenteDAO.inserirAgente("ricardo", "Ricardo", "gui123", "123.654.981-81");
-
-        // agenteDAO.buscarAgentes();
-
-        DenunciaDAO d1 = new DenunciaDAO();
-
-        d1.insereDenuncia("Denuncia teste", 1, 1);
-        d1.consultaDenuncia();
+        EnderecoDAO enderecoDAO = new EnderecoDAO();
+        enderecoDAO.insereEndereco("Testando", 123, 0, 2);
     }
 }

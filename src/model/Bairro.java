@@ -7,18 +7,16 @@ public class Bairro {
     private int idBairro;
     private String descricao;
     private int casosTotal;
-    private Agente agente;
-    private Endereco endereco;
+    private int idAgente;
 
     private Pesquisa pesquisaAtual;
     private ArrayList<Endereco> listaEndereco;
 
-    public Bairro(int idBairro, String descricao, int casosTotal, Agente agente, Endereco endereco) {
+    public Bairro(int idBairro, String descricao, int casosTotal, int idAgente) {
         this.idBairro = idBairro;
         this.descricao = descricao;
         this.casosTotal = casosTotal;
-        this.agente = agente;
-        this.endereco = endereco;
+        this.idAgente = idAgente;
     }
 
     // public Bairro(Pesquisa pesquisaAtual, String descricao) {
@@ -62,20 +60,12 @@ public class Bairro {
         this.casosTotal = casosTotal;
     }
 
-    public Agente getAgente() {
-        return agente;
+    public int getIdAgente() {
+        return idAgente;
     }
 
-    public void setAgente(Agente agente) {
-        this.agente = agente;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setIdAgente(int idAgente) {
+        this.idAgente = idAgente;
     }
 
     public Pesquisa getPesquisaAtual() {
@@ -90,9 +80,17 @@ public class Bairro {
         this.listaEndereco.add(end);
     }
 
-    public void somarCasos() {
-        List<Endereco> listaCasos = this.getListaEndereco().stream().filter(i -> i.getfocoDengue()).toList();
-        System.out.println("Quantidade de casos no bairro " + this.getDescricao() + ": " + listaCasos.size());
+    public void mostrarDados() {
+        System.out.println("Nome: " + this.descricao);
     }
+
+    /*
+     * public void somarCasos() {
+     * List<Endereco> listaCasos = this.getListaEndereco().stream().filter(i ->
+     * i.getfocoDengue()).toList();
+     * System.out.println("Quantidade de casos no bairro " + this.getDescricao() +
+     * ": " + listaCasos.size());
+     * }
+     */
 
 }

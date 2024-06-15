@@ -5,15 +5,16 @@ import java.util.ArrayList;
 public class Proprietario extends Pessoa {
     private int idProprietario;
     private Endereco endereco;
+    private int idEndereco;
 
     private ArrayList<Endereco> listaEnd;
     private ArrayList<Denuncia> minhaDenuncias;
 
     public Proprietario(String nome, String cpf, String nomeUsuario, String senha, int idProprietario,
-            Endereco endereco) {
+            int idEndereco) {
         super(nome, cpf, nomeUsuario, senha);
         this.idProprietario = idProprietario;
-        this.endereco = endereco;
+        this.idEndereco = idEndereco;
     }
 
     public Proprietario(String nome, String cpf, String nomeUsuario, String senha) {
@@ -72,6 +73,14 @@ public class Proprietario extends Pessoa {
 
     public void setMinhaDenuncias(ArrayList<Denuncia> minhaDenuncias) {
         this.minhaDenuncias = minhaDenuncias;
+    }
+
+    public int getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
     }
 
 }

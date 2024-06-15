@@ -8,13 +8,23 @@ public class Endereco {
     private int numCasa;
     private Proprietario proprietario;
     private boolean focoDengue;
+    private int idBairro;
 
-    public Endereco(int idEndereco, String logradouro, int numCasa, int quantCaso, Proprietario proprietario) {
+    public int getIdBairro() {
+        return idBairro;
+    }
+
+    public void setIdBairro(int idBairro) {
+        this.idBairro = idBairro;
+    }
+
+    public Endereco(int idEndereco, String logradouro, int numCasa, Proprietario proprietario, int idBairro) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.numCasa = numCasa;
         this.proprietario = proprietario;
         this.focoDengue = false;
+        this.idBairro = idBairro;
 
         this.proprietario.addEndDono(this);
     }

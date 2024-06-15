@@ -4,17 +4,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import model.Bairro;
 
 public class BairroDAO {
   private Connection connection;
   private PreparedStatement preparedStatement;
+  private ArrayList<Bairro> listaDeBairro;
 
   public BairroDAO() {
     connection = BD.getConnection();
+    listaDeBairro = new ArrayList<>();
   }
 
-  public void buscarBairro() {
-    String sql = " SELECT * FROM bairro ";
+  public ArrayList<Bairro> buscarBairros() {
+    String sql = "SELECT * FROM bairro";
+
     try {
       preparedStatement = connection.prepareStatement(sql);
       ResultSet resultSet = preparedStatement.executeQuery();
@@ -24,13 +30,14 @@ public class BairroDAO {
         String descricao = resultSet.getString("descricao");
         int casosTotal = resultSet.getInt("casosTotal");
         int idAgente = resultSet.getInt("idAgente");
-        int idEndeco = resultSet.getInt("idEndereco");
 
-        System.out.println("ID do Bairro: " + idBairro);
-        System.out.println("Descrição: " + descricao);
-        System.out.println("Casos Totatais: " + casosTotal);
-        System.out.println("ID do Agente: " + idAgente);
-        System.out.println("ID do Endereco: " + idEndeco);
+        Bairro bairro = new Bairro(idBairro, descricao, casosTotal, idAgente);
+        listaDeBairro.add(bairro);
+
+        // System.out.println("ID do Bairro: " + idBairro);
+        // System.out.println("Descrição: " + descricao);
+        // System.out.println("Casos Totatais: " + casosTotal);
+        // System.out.println("ID do Agente: " + idAgente);
 
       }
 
@@ -40,5 +47,6 @@ public class BairroDAO {
       System.out.println((" Error:" + e.getMessage()));
     }
 
+    return listaDeBairro;
   }
 }
