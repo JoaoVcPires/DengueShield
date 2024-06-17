@@ -1,27 +1,23 @@
 package model;
 
 public class Caso {
-    private Agente responsavel;
+    private int idCaso;
     private String descricao;
-    private Endereco enderecoDoCaso;
+    private int idEndereco;
 
-    public Caso(String descricao, Endereco enderecoDoCaso, Agente responsavel) {
+    public Caso(String descricao, int idEndereco, int idCaso) {
         this.descricao = descricao;
-        this.enderecoDoCaso = enderecoDoCaso;
-        this.responsavel = responsavel;
-
-        if (this.enderecoDoCaso != null) {
-            enderecoDoCaso.setfocoDengue(true);
-            this.responsavel.meusCasos(this);
-        }
+        this.idEndereco = idEndereco;
+        this.idCaso = idCaso;
     }
 
-    public Agente getResponsavel() {
-        return responsavel;
+    public Caso(String descricao, int idEndereco) {
+        this.descricao = descricao;
+        this.idEndereco = idEndereco;
     }
 
-    public void setResponsavel(Agente responsavel) {
-        this.responsavel = responsavel;
+    public Caso(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getDescricao() {
@@ -32,12 +28,20 @@ public class Caso {
         this.descricao = descricao;
     }
 
-    public Endereco getEnderecoDoCaso() {
-        return enderecoDoCaso;
+    public int getIdEndereco() {
+        return idEndereco;
     }
 
-    public void setEnderecoDoCaso(Endereco endCaso) {
-        this.enderecoDoCaso = endCaso;
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
+    }
+
+    public int getIdCaso() {
+        return idCaso;
+    }
+
+    public void setIdCaso(int idCaso) {
+        this.idCaso = idCaso;
     }
 
 }

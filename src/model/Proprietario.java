@@ -1,26 +1,22 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Proprietario extends Pessoa {
     private int idProprietario;
-    private Endereco endereco;
     private int idEndereco;
 
-    private ArrayList<Endereco> listaEnd;
-    private ArrayList<Denuncia> minhaDenuncias;
+    public Proprietario(String nome, String cpf, String nomeUsuario, String senha) {
+        super(nome, cpf, nomeUsuario, senha);
+    }
 
-    public Proprietario(String nome, String cpf, String nomeUsuario, String senha, int idProprietario,
-            int idEndereco) {
+    public Proprietario(String nome, String cpf, String nomeUsuario, String senha, int idProprietario, int idEndereco) {
         super(nome, cpf, nomeUsuario, senha);
         this.idProprietario = idProprietario;
         this.idEndereco = idEndereco;
     }
 
-    public Proprietario(String nome, String cpf, String nomeUsuario, String senha) {
+    public Proprietario(String nome, String cpf, String nomeUsuario, String senha, int idEndereco) {
         super(nome, cpf, nomeUsuario, senha);
-        this.listaEnd = new ArrayList<>();
-        this.minhaDenuncias = new ArrayList<>();
+        this.idEndereco = idEndereco;
     }
 
     public int getIdProprietario() {
@@ -29,50 +25,6 @@ public class Proprietario extends Pessoa {
 
     public void setIdProprietario(int idProprietario) {
         this.idProprietario = idProprietario;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public ArrayList<Endereco> getListaEnd() {
-        return listaEnd;
-    }
-
-    public void setListaEnd(ArrayList<Endereco> listaEnd) {
-        this.listaEnd = listaEnd;
-    }
-
-    public void addEndDono(Endereco myEnd) {
-        this.listaEnd.add(myEnd);
-    }
-
-    public void addDenuncia(Denuncia y) {
-        this.minhaDenuncias.add(y);
-    }
-
-    public void consultarMeusEnd() {
-        System.out.println("Endereços de " + this.getNomeUsuario());
-        for (Endereco g : listaEnd) {
-            System.out.println(g.getLogradouro() + " " + g.getNumCasa());
-        }
-    }
-
-    @Override
-    public void infoPessoa() {
-
-    }
-
-    public ArrayList<Denuncia> getMinhaDenuncias() {
-        return minhaDenuncias;
-    }
-
-    public void setMinhaDenuncias(ArrayList<Denuncia> minhaDenuncias) {
-        this.minhaDenuncias = minhaDenuncias;
     }
 
     public int getIdEndereco() {

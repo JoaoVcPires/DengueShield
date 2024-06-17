@@ -1,15 +1,18 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Agente extends Pessoa {
+    private int idAgente;
     private String status;
-    private ArrayList<Caso> casosAgente;
 
-    public Agente(String status, String nome, String cpf, String nomeUsuario, String senha) {
+    public Agente(String nome, String cpf, String nomeUsuario, String senha, int idAgente, String status) {
+        super(nome, cpf, nomeUsuario, senha);
+        this.idAgente = idAgente;
+        this.status = status;
+    }
+
+    public Agente(String nome, String cpf, String nomeUsuario, String senha, String status) {
         super(nome, cpf, nomeUsuario, senha);
         this.status = status;
-        this.casosAgente = new ArrayList<>();
     }
 
     public String getStatus() {
@@ -20,16 +23,12 @@ public class Agente extends Pessoa {
         this.status = status;
     }
 
-    public void meusCasos(Caso c1) {
-        this.casosAgente.add(c1);
+    public int getIdAgente() {
+        return idAgente;
     }
 
-    public void mostraCasos() {
-        System.out.println("Casos registrado pelo usuario: " + this.getNomeUsuario());
-        for (Caso i : casosAgente) {
-            System.out.println(i.getDescricao() + "  Endereço: " + i.getEnderecoDoCaso().getLogradouro() + " "
-                    + i.getEnderecoDoCaso().getNumCasa());
-        }
+    public void setIdAgente(int idAgente) {
+        this.idAgente = idAgente;
     }
 
 }

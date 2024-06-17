@@ -1,20 +1,49 @@
 package model;
 
+import statusEnum.StatusDeDenuncia;
+import statusEnum.StatusDeDenuncia.SelectStatus;
+
 public class Denuncia {
     private int idDenuncia;
     private String descricao;
-    private Endereco enderecoDoProprietarioDenunciado;
-    private Proprietario proprietarioQueEstaRealizandoDenuncia;
+    private int idEndereco;
+    private int idProprietario;
+
     private StatusDeDenuncia.SelectStatus statusDenuncia;
 
-    public Denuncia(String descricao, Endereco enderecoDoProprietarioDenunciado,
-            Proprietario proprietarioQueEstaRealizandoDenuncia) {
+    public Denuncia(int idDenuncia, String descricao, int idEndereco, int idProprietario, SelectStatus statusDenuncia) {
+        this.idDenuncia = idDenuncia;
         this.descricao = descricao;
-        this.enderecoDoProprietarioDenunciado = enderecoDoProprietarioDenunciado;
-        this.proprietarioQueEstaRealizandoDenuncia = proprietarioQueEstaRealizandoDenuncia;
-        this.statusDenuncia = StatusDeDenuncia.SelectStatus.PENDENTE;
+        this.idEndereco = idEndereco;
+        this.idProprietario = idProprietario;
+        this.statusDenuncia = statusDenuncia;
 
-        this.getProprietarioQueEstaRealizandoDenuncia().addDenuncia(this);
+        this.statusDenuncia = StatusDeDenuncia.SelectStatus.PENDENTE;
+    }
+
+    public Denuncia(String descricao, int idEndereco, int idProprietario, SelectStatus statusDenuncia) {
+        this.descricao = descricao;
+        this.idEndereco = idEndereco;
+        this.idProprietario = idProprietario;
+        this.statusDenuncia = statusDenuncia;
+
+        this.statusDenuncia = StatusDeDenuncia.SelectStatus.PENDENTE;
+    }
+
+    public int getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
+    }
+
+    public int getIdProprietario() {
+        return idProprietario;
+    }
+
+    public void setIdProprietario(int idProprietario) {
+        this.idProprietario = idProprietario;
     }
 
     public String getDescricao() {
@@ -23,22 +52,6 @@ public class Denuncia {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Endereco getEnderecoDoProprietarioDenunciado() {
-        return enderecoDoProprietarioDenunciado;
-    }
-
-    public void setEnderecoDoProprietarioDenunciado(Endereco enderecoDoProprietarioDenunciado) {
-        this.enderecoDoProprietarioDenunciado = enderecoDoProprietarioDenunciado;
-    }
-
-    public Proprietario getProprietarioQueEstaRealizandoDenuncia() {
-        return proprietarioQueEstaRealizandoDenuncia;
-    }
-
-    public void setProprietarioQueEstaRealizandoDenuncia(Proprietario proprietarioQueEstaRealizandoDenuncia) {
-        this.proprietarioQueEstaRealizandoDenuncia = proprietarioQueEstaRealizandoDenuncia;
     }
 
     public StatusDeDenuncia.SelectStatus getStatusDenuncia() {
@@ -52,10 +65,6 @@ public class Denuncia {
     public void dadosDenuncia() {
         System.out.println("Informações da denuncia:");
         System.out.println("Descrição: " + this.descricao);
-        System.out.println(
-                "Endereço denunciado: " + this.enderecoDoProprietarioDenunciado.getLogradouro() + "  "
-                        + this.enderecoDoProprietarioDenunciado.getNumCasa());
-        System.out.println("Emissor: " + this.getProprietarioQueEstaRealizandoDenuncia().getNomeUsuario());
         System.out.println("Status: " + this.getStatusDenuncia());
     }
 

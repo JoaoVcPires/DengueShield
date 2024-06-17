@@ -1,14 +1,26 @@
 package model;
 
-import java.util.Scanner;
-
 public class Endereco {
     private int idEndereco;
     private String logradouro;
     private int numCasa;
-    private Proprietario proprietario;
     private boolean focoDengue;
     private int idBairro;
+
+    public Endereco(String logradouro, int numCasa, int idBairro) {
+        this.logradouro = logradouro;
+        this.numCasa = numCasa;
+        this.focoDengue = false;
+        this.idBairro = idBairro;
+    }
+
+    public Endereco(int idEndereco, String logradouro, int numCasa, int idBairro, boolean focoDengue) {
+        this.idEndereco = idEndereco;
+        this.logradouro = logradouro;
+        this.numCasa = numCasa;
+        this.focoDengue = focoDengue;
+        this.idBairro = idBairro;
+    }
 
     public int getIdBairro() {
         return idBairro;
@@ -16,17 +28,6 @@ public class Endereco {
 
     public void setIdBairro(int idBairro) {
         this.idBairro = idBairro;
-    }
-
-    public Endereco(int idEndereco, String logradouro, int numCasa, Proprietario proprietario, int idBairro) {
-        this.idEndereco = idEndereco;
-        this.logradouro = logradouro;
-        this.numCasa = numCasa;
-        this.proprietario = proprietario;
-        this.focoDengue = false;
-        this.idBairro = idBairro;
-
-        this.proprietario.addEndDono(this);
     }
 
     public int getIdEndereco() {
@@ -53,53 +54,12 @@ public class Endereco {
         this.numCasa = numCasa;
     }
 
-    public Proprietario getProprietario() {
-        return proprietario;
+    public boolean isFocoDengue() {
+        return focoDengue;
     }
 
-    public void setPropriet(Proprietario proprietario) {
-        this.proprietario = proprietario;
-    }
-
-    public boolean getfocoDengue() {
-        return this.focoDengue;
-    }
-
-    public void setfocoDengue(boolean x) {
-        this.focoDengue = x;
-    }
-
-    public void alterarDados() {
-        Scanner sc = new Scanner(System.in);
-        int op;
-        System.out.println("Alterar informações do endereço");
-        System.out.println("Escolha a opção de alteração:0-Encerrar\n1-Logradouro\n2-Numero");
-        op = sc.nextInt();
-        do {
-            if (op == 1) {
-                System.out.println("Entre com o logradouro correto");
-                this.setLogradouro(sc.next());
-                System.out.println("Logradouro alterado para: " + this.getLogradouro());
-                break;
-            } else if (op == 2) {
-                System.out.println("Entre com o numero correto");
-                this.setNumCasa(sc.nextInt());
-                System.out.println("Numero da casa alterado para: " + this.getNumCasa());
-                break;
-            } else if (op == 0) {
-                System.out.println("Encerrando...");
-                return;
-            } else {
-                System.out.println("Opcao inválida!");
-            }
-            sc.close();
-        } while (op != 0);
-    }
-
-    public void dadosEnd() {
-        System.out.println("Informações de endereço:");
-        System.out.println("Logradouro: " + this.getLogradouro() + "   N° " + this.getNumCasa()
-                + "   Proprietario do imóvel: " + this.getProprietario().getNome());
+    public void setFocoDengue(boolean focoDengue) {
+        this.focoDengue = focoDengue;
     }
 
 }

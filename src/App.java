@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
-import Controller.BairroController;
-import DAO.EnderecoDAO;
+import controller.BairroController;
+import dao.EnderecoDAO;
 
 public class App {
     private static BairroController bairroController;

@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Vistoria {
   private int idVistoria;
@@ -11,6 +11,13 @@ public class Vistoria {
 
   public Vistoria(int idVistoria, int idAgente, int idEndereco, Date dataDaVisita, String descricao) {
     this.idVistoria = idVistoria;
+    this.idAgente = idAgente;
+    this.idEndereco = idEndereco;
+    this.dataDaVisita = dataDaVisita;
+    this.descricao = descricao;
+  }
+
+  public Vistoria(int idAgente, int idEndereco, Date dataDaVisita, String descricao) {
     this.idAgente = idAgente;
     this.idEndereco = idEndereco;
     this.dataDaVisita = dataDaVisita;
