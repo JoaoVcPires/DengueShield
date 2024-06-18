@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import connection.BD;
 import model.Endereco;
@@ -8,13 +9,15 @@ import model.Endereco;
 public class EnderecoDAO {
   private Connection connection;
   private PreparedStatement preparedStatement;
+  ArrayList<Endereco> listaEnderecos;
 
   public EnderecoDAO() {
     connection = BD.getConnection();
   }
 
-  public void consultaEndereco() {
+  public ArrayList<Endereco> buscarListaDeEndereco() {
     String sql = "SELECT * FROM endereco";
+    listaEnderecos = new ArrayList<>();
 
     try {
       preparedStatement = connection.prepareStatement(sql);
@@ -23,21 +26,21 @@ public class EnderecoDAO {
       while (resultSet.next()) {
         int idEndereco = resultSet.getInt("idEndereco");
         String logradouro = resultSet.getString("logradouro");
-        String numCasa = resultSet.getString("numCasa");
-        boolean focoDengue = resultSet.getBoolean("focoDengue");
-        int idBairro = resultSet.getInt("idBanco");
+        int numCasa = resultSet.getInt("numCasa");
+        boolean focoDengue = resultSet.getInt("focoDengue") == 1;
+        int idBairro = resultSet.getInt("idBairro");
 
-        System.out.println(idEndereco);
-        System.out.println(logradouro);
-        System.out.println(numCasa);
-        System.out.println(focoDengue);
-        System.out.println(idBairro);
+        Endereco endereco = new Endereco(idEndereco, logradouro, numCasa, idBairro, focoDengue);
+        listaEnderecos.add(endereco);
       }
+
       preparedStatement.close();
 
     } catch (SQLException error) {
       System.out.println("Erro: " + error.getMessage());
     }
+
+    return listaEnderecos;
   }
 
   public void insereEndereco(Endereco endereco) {

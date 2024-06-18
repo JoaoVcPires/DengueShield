@@ -1,36 +1,41 @@
 package controller;
 
+import java.util.ArrayList;
+
 import dao.EnderecoDAO;
 import model.Endereco;
 
 public class EnderecoController {
   EnderecoDAO enderecoDAO;
+  BairroController bairroController;
 
   public EnderecoController() {
     enderecoDAO = new EnderecoDAO();
   }
 
-  public boolean validarDados(String logradouro, int numCasa, int idBairro) {
+  public boolean validarDadosDoEndereco(Endereco endereco) {
+    bairroController = new BairroController();
     // Validar logradouro e numCasa
 
-    // Verificar se o idBairro escolhido é algum dos bairros cadastrados
+    if (!bairroController.validarBairroEscolhido(endereco.getIdBairro())) {
+      System.out.println("Bairro escolhido inválido!");
+      return false;
+    }
+
     return true;
   }
 
+  public ArrayList<Endereco> buscarListaDeEndereco() {
+    return enderecoDAO.buscarListaDeEndereco();
+  }
+
+  public Endereco buscarUltimoEnderecoCadastrado() {
+    ArrayList<Endereco> listaDeEnderecos = buscarListaDeEndereco();
+    return listaDeEnderecos.get(listaDeEnderecos.size() - 1);
+  }
+
   public void cadastrarEndereco(Endereco endereco) {
-    String logradouro = endereco.getLogradouro();
-    int numCasa = endereco.getNumCasa();
-    int focoDengue = endereco.getfocoDengue() == true ? 1 : 0;
-    int idBairro = endereco.getIdBairro();
-
-    System.out.println("Dados validados!");
-
-    if (validarDados(logradouro, numCasa, idBairro)) {
-      enderecoDAO.insereEndereco(logradouro, numCasa, focoDengue, idBairro);
-    } else {
-      System.out.println("Dados do endereço inválidos. Por favor preencha novamente com atenção!");
-    }
-
+    enderecoDAO.insereEndereco(endereco);
   }
 
 }

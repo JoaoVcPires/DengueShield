@@ -1,24 +1,40 @@
 package controller;
 
+import dao.ProprietarioDAO;
+import model.Endereco;
 import model.Proprietario;
 
 public class ProprietarioController {
-  ProprietarioController proprietarioController;
+  ProprietarioDAO proprietarioDAO;
+  EnderecoController enderecoController;
 
   public ProprietarioController() {
-    proprietarioController = new ProprietarioController();
+    proprietarioDAO = new ProprietarioDAO();
   }
 
-  public boolean validarDados() {
+  public boolean verificarSeNomeUsuarioEstaDisponivel(String nomeUsuario) {
+    return true;
+  }
+
+  public boolean validarDadosDoProprietario(Proprietario proprietario) {
+    // Validação dos dados
+
+    if (!verificarSeNomeUsuarioEstaDisponivel(proprietario.getNomeUsuario())) {
+      System.out.println("Nome de usuário indisponível!");
+      return false;
+    }
 
     return true;
   }
 
-  public void cadastrarProprietarioNoBD(Proprietario proprietario) {
-    String nome = proprietario.getNome();
-    String cpf = proprietario.getCpf();
-    String nomeUsuario = proprietario.getNomeUsuario();
-    String senha = proprietario.getSenha();
-    int idEndereco = proprietario.getIdEndereco();
+  public void cadastrarProprietarioNoBD(Proprietario proprietario, Endereco endereco) {
+    enderecoController = new EnderecoController();
+
+    if (validarDadosDoProprietario(proprietario) && enderecoController.validarDadosDoEndereco(endereco)) {
+      enderecoController.cadastrarEndereco(endereco);
+      Endereco ultimoEnderecoCadastrado = enderecoController.buscarUltimoEnderecoCadastrado();
+      proprietario.setIdEndereco(ultimoEnderecoCadastrado.getIdEndereco());
+      proprietarioDAO.inserirProprietario(proprietario);
+    }
   }
 }

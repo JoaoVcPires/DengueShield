@@ -19,7 +19,7 @@ public class BairroDAO {
     listaDeBairro = new ArrayList<>();
   }
 
-  public ArrayList<Bairro> buscarBairros() {
+  public ArrayList<Bairro> buscarListaDeBairros() {
     String sql = "SELECT * FROM bairro";
 
     try {

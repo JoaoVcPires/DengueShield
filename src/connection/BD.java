@@ -14,10 +14,8 @@ public class BD {
     try {
       if (connection == null) {
         connection = DriverManager.getConnection(url, user, senha);
-        System.out.println("Conectado!");
         return connection;
       } else {
-        System.out.println("Ja esta conectado!");
         return connection;
       }
     } catch (Exception e) {
