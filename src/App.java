@@ -2,12 +2,15 @@ import java.util.Scanner;
 
 import controller.BairroController;
 import dao.EnderecoDAO;
+import view.AgenteView;
 import view.ProprietarioView;
 
 public class App {
 
     public static void main(String[] args) throws Exception {
-        ProprietarioView proprietarioView;
+        ProprietarioView proprietarioView = new ProprietarioView();
+        AgenteView agenteView = new AgenteView();
+
         int escolha = 0;
         Scanner scanner = new Scanner(System.in);
 
@@ -20,9 +23,10 @@ public class App {
 
             switch (escolha) {
                 case 1:
+                    agenteView.interfaceInicial();
                     break;
                 case 2:
-                    proprietarioView = new ProprietarioView();
+                    proprietarioView.interfaceInicial();
                     break;
                 case 3:
                     break;

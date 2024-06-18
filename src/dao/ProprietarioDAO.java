@@ -46,6 +46,65 @@ public class ProprietarioDAO {
 
   }
 
+  public Proprietario buscarProprietarioPorNomeDeUsuario(String nomeUsuario) {
+    String sql = "SELECT * FROM proprietario WHERE nomeUsuario = ?";
+    Proprietario proprietario = null;
+
+    try {
+      preparedstatement = connection.prepareStatement(sql);
+      preparedstatement.setString(1, nomeUsuario);
+
+      ResultSet resultset = preparedstatement.executeQuery();
+
+      while (resultset.next()) {
+        int id = resultset.getInt("idProprietario");
+        String usuario = resultset.getString("nomeUsuario");
+        String nome = resultset.getString("nomePessoa");
+        String senha = resultset.getString("senha");
+        String cpf = resultset.getString("CPF");
+        int idEnd = resultset.getInt("idEndereco");
+
+        proprietario = new Proprietario(nome, cpf, usuario, senha, id, idEnd);
+      }
+      preparedstatement.close();
+
+    } catch (SQLException e) {
+      System.out.println("Erro: " + e.getMessage());
+    }
+
+    return proprietario;
+  }
+
+  public Proprietario buscarProprietarioParaValidarLogin(String nomeUsuario, String senhaUsuario) {
+    String sql = "SELECT * FROM proprietario WHERE nomeUsuario = ? AND senha = ?";
+    Proprietario proprietario = null;
+
+    try {
+      preparedstatement = connection.prepareStatement(sql);
+      preparedstatement.setString(1, nomeUsuario);
+      preparedstatement.setString(2, senhaUsuario);
+
+      ResultSet resultset = preparedstatement.executeQuery();
+
+      while (resultset.next()) {
+        int id = resultset.getInt("idProprietario");
+        String usuario = resultset.getString("nomeUsuario");
+        String nome = resultset.getString("nomePessoa");
+        String senha = resultset.getString("senha");
+        String cpf = resultset.getString("CPF");
+        int idEnd = resultset.getInt("idEndereco");
+
+        proprietario = new Proprietario(nome, cpf, usuario, senha, id, idEnd);
+      }
+      preparedstatement.close();
+
+    } catch (SQLException e) {
+      System.out.println("Erro: " + e.getMessage());
+    }
+
+    return proprietario;
+  }
+
   public void inserirProprietario(Proprietario proprietario) {
     String sql = "INSERT INTO proprietario(nomeUsuario, nomePessoa, senha, CPF, idEndereco) VALUES (?, ?, ?, ?, ?)";
 

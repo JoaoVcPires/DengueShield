@@ -13,7 +13,28 @@ public class ProprietarioController {
   }
 
   public boolean verificarSeNomeUsuarioEstaDisponivel(String nomeUsuario) {
+    if (proprietarioDAO.buscarProprietarioPorNomeDeUsuario(nomeUsuario) != null) {
+      return false;
+    }
+
     return true;
+  }
+
+  public boolean validarLogin(String nomeUsuario, String senha) {
+    boolean loginInvalido = proprietarioDAO.buscarProprietarioParaValidarLogin(nomeUsuario, senha) == null;
+
+    if (loginInvalido) {
+      System.out.println("Usuário ou senha inválidos!");
+      return false;
+    }
+
+    return true;
+  }
+
+  public void realizarLogin(String nomeUsuario, String senha) {
+    if (validarLogin(nomeUsuario, senha)) {
+      System.out.println("Seja Bem-vindo ao DengueShield " + nomeUsuario);
+    }
   }
 
   public boolean validarDadosDoProprietario(Proprietario proprietario) {

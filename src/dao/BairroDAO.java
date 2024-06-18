@@ -16,11 +16,11 @@ public class BairroDAO {
 
   public BairroDAO() {
     connection = BD.getConnection();
-    listaDeBairro = new ArrayList<>();
   }
 
   public ArrayList<Bairro> buscarListaDeBairros() {
     String sql = "SELECT * FROM bairro";
+    listaDeBairro = new ArrayList<>();
 
     try {
       preparedStatement = connection.prepareStatement(sql);

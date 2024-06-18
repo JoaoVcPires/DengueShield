@@ -4,15 +4,13 @@ public class Agente extends Pessoa {
     private int idAgente;
     private String status;
 
-    public Agente(String nome, String cpf, String nomeUsuario, String senha, int idAgente, String status) {
+    public Agente(String nome, String cpf, String nomeUsuario, String senha) {
         super(nome, cpf, nomeUsuario, senha);
-        this.idAgente = idAgente;
-        this.status = status;
     }
 
-    public Agente(String nome, String cpf, String nomeUsuario, String senha, String status) {
+    public Agente(String nome, String cpf, String nomeUsuario, String senha, int idAgente) {
         super(nome, cpf, nomeUsuario, senha);
-        this.status = status;
+        this.idAgente = idAgente;
     }
 
     public String getStatus() {

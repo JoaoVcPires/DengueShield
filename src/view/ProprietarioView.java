@@ -8,14 +8,14 @@ import model.Endereco;
 import model.Proprietario;
 
 public class ProprietarioView {
-  Scanner scanner = new Scanner(System.in);
+  Scanner scanner;
   BairroController bairroController;
   ProprietarioController proprietarioController;
 
   public ProprietarioView() {
     bairroController = new BairroController();
     proprietarioController = new ProprietarioController();
-    interfaceInicial();
+    scanner = new Scanner(System.in);
   }
 
   public void interfaceInicial() {
@@ -34,6 +34,7 @@ public class ProprietarioView {
           cadastroDeProprietario();
           break;
         case 2:
+          login();
           break;
         case 3:
           break;
@@ -41,6 +42,18 @@ public class ProprietarioView {
           System.out.println("Opção inválida!");
       }
     }
+  }
+
+  public void login() {
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.print("Usuario: ");
+    String usuario = scanner.next();
+
+    System.out.print("Senha: ");
+    String senha = scanner.next();
+
+    proprietarioController.realizarLogin(usuario, senha);
   }
 
   public void cadastroDeProprietario() {
