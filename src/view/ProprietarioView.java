@@ -44,6 +44,32 @@ public class ProprietarioView {
     }
   }
 
+  public void exibirMenuPrincipal() {
+    int escolha = 0;
+
+    while (escolha != 3) {
+      System.out.println("******PROPRIETÁRIO******");
+      System.out.println("1 - Criar uma conta");
+      System.out.println("2 - Login");
+      System.out.println("3 - Voltar");
+      System.out.print("Escolha uma das opções acima: ");
+      escolha = scanner.nextInt();
+
+      switch (escolha) {
+        case 1:
+          cadastroDeProprietario();
+          break;
+        case 2:
+          login();
+          break;
+        case 3:
+          break;
+        default:
+          System.out.println("Opção inválida!");
+      }
+    }
+  }
+
   public void login() {
     Scanner scanner = new Scanner(System.in);
 
@@ -53,7 +79,11 @@ public class ProprietarioView {
     System.out.print("Senha: ");
     String senha = scanner.next();
 
-    proprietarioController.realizarLogin(usuario, senha);
+    Proprietario proprietario = proprietarioController.realizarLogin(usuario, senha);
+
+    if (proprietario != null) {
+      exibirMenuPrincipal();
+    }
   }
 
   public void cadastroDeProprietario() {

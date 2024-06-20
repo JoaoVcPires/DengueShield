@@ -20,21 +20,27 @@ public class ProprietarioController {
     return true;
   }
 
-  public boolean validarLogin(String nomeUsuario, String senha) {
-    boolean loginInvalido = proprietarioDAO.buscarProprietarioParaValidarLogin(nomeUsuario, senha) == null;
+  public Proprietario validarLogin(String nomeUsuario, String senha) {
+    Proprietario proprietario = proprietarioDAO.buscarProprietarioParaValidarLogin(nomeUsuario, senha);
+    boolean loginInvalido = proprietario == null;
 
     if (loginInvalido) {
       System.out.println("Usuário ou senha inválidos!");
-      return false;
+      return null;
     }
 
-    return true;
+    return proprietario;
   }
 
-  public void realizarLogin(String nomeUsuario, String senha) {
-    if (validarLogin(nomeUsuario, senha)) {
+  public Proprietario realizarLogin(String nomeUsuario, String senha) {
+    Proprietario proprietario = validarLogin(nomeUsuario, senha);
+
+    if (proprietario != null) {
       System.out.println("Seja Bem-vindo ao DengueShield " + nomeUsuario);
+      return proprietario;
     }
+
+    return null;
   }
 
   public boolean validarDadosDoProprietario(Proprietario proprietario) {
