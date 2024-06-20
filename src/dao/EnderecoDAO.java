@@ -15,6 +15,35 @@ public class EnderecoDAO {
     connection = BD.getConnection();
   }
 
+  public ArrayList<Endereco> buscarListaDeEnderecoPorBairro(int idBairroEscolhido) {
+    String sql = "SELECT * FROM endereco WHERE idBairro = ?";
+    listaEnderecos = new ArrayList<>();
+
+    try {
+      preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setInt(1, idBairroEscolhido);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        int idEndereco = resultSet.getInt("idEndereco");
+        String logradouro = resultSet.getString("logradouro");
+        int numCasa = resultSet.getInt("numCasa");
+        boolean focoDengue = resultSet.getInt("focoDengue") == 1;
+        int idBairro = resultSet.getInt("idBairro");
+
+        Endereco endereco = new Endereco(idEndereco, logradouro, numCasa, idBairro, focoDengue);
+        listaEnderecos.add(endereco);
+      }
+
+      preparedStatement.close();
+
+    } catch (SQLException error) {
+      System.out.println("Erro: " + error.getMessage());
+    }
+
+    return listaEnderecos;
+  }
+
   public ArrayList<Endereco> buscarListaDeEndereco() {
     String sql = "SELECT * FROM endereco";
     listaEnderecos = new ArrayList<>();

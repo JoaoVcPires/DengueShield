@@ -11,21 +11,21 @@ public class Denuncia {
 
     private StatusDeDenuncia.SelectStatus statusDenuncia;
 
-    public Denuncia(int idDenuncia, String descricao, int idEndereco, int idProprietario, SelectStatus statusDenuncia) {
+    public Denuncia(int idDenuncia, String descricao, int idEndereco, int idProprietario) {
         this.idDenuncia = idDenuncia;
         this.descricao = descricao;
         this.idEndereco = idEndereco;
         this.idProprietario = idProprietario;
-        this.statusDenuncia = statusDenuncia;
+        // this.statusDenuncia = statusDenuncia;
 
         this.statusDenuncia = StatusDeDenuncia.SelectStatus.PENDENTE;
     }
 
-    public Denuncia(String descricao, int idEndereco, int idProprietario, SelectStatus statusDenuncia) {
+    public Denuncia(String descricao, int idEndereco, int idProprietario) {
         this.descricao = descricao;
         this.idEndereco = idEndereco;
         this.idProprietario = idProprietario;
-        this.statusDenuncia = statusDenuncia;
+        // this.statusDenuncia = statusDenuncia;
 
         this.statusDenuncia = StatusDeDenuncia.SelectStatus.PENDENTE;
     }

@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import dao.EnderecoDAO;
+import model.Bairro;
 import model.Endereco;
 
 public class EnderecoController {
@@ -38,4 +39,15 @@ public class EnderecoController {
     enderecoDAO.insereEndereco(endereco);
   }
 
+  public ArrayList<Endereco> buscarListaDeEnderecoPorBairro(int idBairro) {
+    return enderecoDAO.buscarListaDeEnderecoPorBairro(idBairro);
+  }
+
+  public void mostrarListaDeEnderecosPorBairro(int idBairro) {
+    ArrayList<Endereco> listaDeEnderecoPorBairro = buscarListaDeEnderecoPorBairro(idBairro);
+
+    for (Endereco endereco : listaDeEnderecoPorBairro) {
+      System.out.println(endereco.getIdEndereco() + " - " + endereco.getLogradouro() + ", N° " + endereco.getNumCasa());
+    }
+  }
 }
