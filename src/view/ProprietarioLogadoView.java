@@ -9,7 +9,6 @@ import model.Denuncia;
 import model.Proprietario;
 
 public class ProprietarioLogadoView {
-  Scanner scanner;
   Proprietario proprietarioLogado;
   BairroController bairroController;
   EnderecoController enderecoController;
@@ -17,13 +16,14 @@ public class ProprietarioLogadoView {
 
   public ProprietarioLogadoView(Proprietario proprietarioLogado) {
     this.proprietarioLogado = proprietarioLogado;
-    scanner = new Scanner(System.in);
     bairroController = new BairroController();
     enderecoController = new EnderecoController();
     denunciaController = new DenunciaController();
   }
 
   public void denunciarEndereco() {
+    Scanner scanner = new Scanner(System.in);
+
     bairroController.mostrarListaDeBairros();
     System.out.print("Escolha um dos bairros acima: ");
     int idBairro = scanner.nextInt();
@@ -34,8 +34,10 @@ public class ProprietarioLogadoView {
       System.out.print("Escolha um dos endereços acima: ");
       int idEndereco = scanner.nextInt();
 
+      scanner.nextLine();
+
       System.out.println("Descrição da denúncia: ");
-      String descricao = scanner.next();
+      String descricao = scanner.nextLine();
 
       Denuncia denuncia = new Denuncia(descricao, idEndereco, proprietarioLogado.getIdProprietario());
       denunciaController.cadastrarDenuncia(denuncia);
@@ -46,6 +48,7 @@ public class ProprietarioLogadoView {
   }
 
   public void exibirMenuDeDenuncias() {
+    Scanner scanner = new Scanner(System.in);
     int escolha = 0;
 
     while (escolha != 3) {
@@ -55,6 +58,8 @@ public class ProprietarioLogadoView {
       System.out.println("3 - Voltar");
       System.out.print("Escolha uma das opções acima: ");
       escolha = scanner.nextInt();
+
+      scanner.nextLine();
 
       switch (escolha) {
         case 1:
@@ -72,6 +77,8 @@ public class ProprietarioLogadoView {
   }
 
   public void exibirMenuPrincipal() {
+    Scanner scanner = new Scanner(System.in);
+
     int escolha = 0;
 
     while (escolha != 3) {

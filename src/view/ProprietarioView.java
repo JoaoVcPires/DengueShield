@@ -8,7 +8,6 @@ import model.Endereco;
 import model.Proprietario;
 
 public class ProprietarioView {
-  Scanner scanner;
   BairroController bairroController;
   ProprietarioController proprietarioController;
   ProprietarioLogadoView proprietarioLogadoView;
@@ -16,10 +15,10 @@ public class ProprietarioView {
   public ProprietarioView() {
     bairroController = new BairroController();
     proprietarioController = new ProprietarioController();
-    scanner = new Scanner(System.in);
   }
 
   public void interfaceInicial() {
+    Scanner scanner = new Scanner(System.in);
     int escolha = 0;
 
     while (escolha != 3) {
@@ -60,29 +59,34 @@ public class ProprietarioView {
       proprietarioLogadoView = new ProprietarioLogadoView(proprietario);
       proprietarioLogadoView.exibirMenuPrincipal();
     }
+
   }
 
   public void cadastroDeProprietario() {
     Scanner scanner = new Scanner(System.in);
 
     System.out.print("Nome: ");
-    String nome = scanner.next();
+    String nome = scanner.nextLine();
 
     System.out.print("CPF: ");
     String cpf = scanner.next();
 
+    scanner.nextLine();
+
     System.out.print("Usuário: ");
-    String usuario = scanner.next();
+    String usuario = scanner.nextLine();
 
     System.out.print("Senha: ");
-    String senha = scanner.next();
+    String senha = scanner.nextLine();
 
     System.out.println("Escolha o número do bairro que você reside: ");
     bairroController.mostrarListaDeBairros();
     int idBairro = scanner.nextInt();
 
+    scanner.nextLine();
+
     System.out.print("Logradouro: ");
-    String logradouro = scanner.next();
+    String logradouro = scanner.nextLine();
 
     System.out.print("Número da casa: ");
     int numeroDaCasa = scanner.nextInt();

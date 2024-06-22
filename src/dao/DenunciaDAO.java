@@ -25,11 +25,13 @@ public class DenunciaDAO {
         String descricao = resultSet.getString("descricao");
         int idEndereco = resultSet.getInt("idEndereco");
         int idProprietario = resultSet.getInt("idProprietario");
+        String status = resultSet.getString("status");
 
         System.out.println(idDenuncia);
         System.out.println(descricao);
         System.out.println(idEndereco);
         System.out.println(idProprietario);
+        System.out.println(status);
       }
       preparedStatement.close();
 
@@ -39,7 +41,7 @@ public class DenunciaDAO {
   }
 
   public void insereDenuncia(Denuncia denuncia) {
-    String sql = "INSERT INTO denuncia(descricao,idEndereco,idProprietario) values (?,?,?)";
+    String sql = "INSERT INTO denuncia(descricao,idEndereco,idProprietario,status) values (?,?,?,?)";
 
     try {
       preparedStatement = connection.prepareStatement(sql);
@@ -47,6 +49,7 @@ public class DenunciaDAO {
       preparedStatement.setString(1, denuncia.getDescricao());
       preparedStatement.setInt(2, denuncia.getIdEndereco());
       preparedStatement.setInt(3, denuncia.getIdProprietario());
+      preparedStatement.setString(4, denuncia.getStatusDenuncia().getDescricao());
 
       preparedStatement.execute();
 
