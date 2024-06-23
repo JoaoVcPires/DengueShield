@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 
 import dao.EnderecoDAO;
-import model.Bairro;
 import model.Endereco;
 
 public class EnderecoController {

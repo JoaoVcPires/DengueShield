@@ -24,11 +24,23 @@ public class BairroController {
     return false;
   }
 
+  public ArrayList<Bairro> buscarListaDeBairros() {
+    return bairroDAO.buscarListaDeBairros();
+  }
+
   public void mostrarListaDeBairros() {
-    ArrayList<Bairro> listaDeBairro = bairroDAO.buscarListaDeBairros();
+    ArrayList<Bairro> listaDeBairro = buscarListaDeBairros();
 
     for (Bairro bairro : listaDeBairro) {
       System.out.println(bairro.getIdBairro() + " - " + bairro.getDescricao());
+    }
+  }
+
+  public void mostrarQuantidadeDeCasosDeCadaBairro() {
+    ArrayList<Bairro> listaDeBairro = buscarListaDeBairros();
+
+    for (Bairro bairro : listaDeBairro) {
+      System.out.println(bairro.getDescricao() + " - " + bairro.getCasosTotal() + " casos");
     }
   }
 }

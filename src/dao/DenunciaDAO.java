@@ -1,19 +1,53 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import connection.BD;
 import model.Denuncia;
+import statusEnum.StatusDeDenuncia;
+import statusEnum.StatusDeDenuncia.SelectStatus;
 
 public class DenunciaDAO {
   private Connection connection;
   private PreparedStatement preparedStatement;
+  ArrayList<Denuncia> listaDeDenuncias;
 
   public DenunciaDAO() {
     connection = BD.getConnection();
   }
 
-  public void consultaDenuncia() {
+  public ArrayList<Denuncia> buscarListaDeDenunciasPorProprietario(int idProprietarioDaDenuncia) {
+    String sql = "SELECT * FROM denuncia WHERE idProprietario = ?";
+    listaDeDenuncias = new ArrayList<>();
+
+    try {
+      preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setInt(1, idProprietarioDaDenuncia);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        int idDenuncia = resultSet.getInt("idDenuncia");
+        String descricao = resultSet.getString("descricao");
+        int idEndereco = resultSet.getInt("idEndereco");
+        int idProprietario = resultSet.getInt("idProprietario");
+        String status = resultSet.getString("status");
+
+        StatusDeDenuncia.SelectStatus statusDaDenuncia = StatusDeDenuncia.SelectStatus.getStatus(status);
+
+        Denuncia denuncia = new Denuncia(idDenuncia, descricao, idEndereco, idProprietario, statusDaDenuncia);
+        listaDeDenuncias.add(denuncia);
+      }
+      preparedStatement.close();
+
+    } catch (SQLException error) {
+      System.out.println("Erro: " + error.getMessage());
+    }
+
+    return listaDeDenuncias;
+  }
+
+  public void buscarListaDeDenuncias() {
     String sql = "SELECT * FROM denuncia";
 
     try {

@@ -15,5 +15,18 @@ public class StatusDeDenuncia {
         public String getDescricao() {
             return descricao;
         }
+
+        public static SelectStatus getStatus(String descricao) {
+            switch (descricao) {
+                case "Pendente":
+                    return SelectStatus.PENDENTE;
+                case "Em análise":
+                    return SelectStatus.EM_ANÁLISE;
+                case "Arquivada":
+                    return SelectStatus.ARQUIVADA;
+                default:
+                    return SelectStatus.PENDENTE;
+            }
+        }
     }
 }

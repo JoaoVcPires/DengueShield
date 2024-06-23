@@ -53,7 +53,7 @@ public class ProprietarioLogadoView {
 
     while (escolha != 3) {
       System.out.println("******MENU DE DENÚNCIAS - PROPRIETÁRIO******");
-      System.out.println("1 - Denúnciar endereço");
+      System.out.println("1 - Denunciar endereço");
       System.out.println("2 - Minhas denúncias");
       System.out.println("3 - Voltar");
       System.out.print("Escolha uma das opções acima: ");
@@ -66,7 +66,7 @@ public class ProprietarioLogadoView {
           denunciarEndereco();
           break;
         case 2:
-          // login();
+          denunciaController.mostrarListaDeDenuncias(proprietarioLogado.getIdProprietario());
           break;
         case 3:
           break;
@@ -84,7 +84,7 @@ public class ProprietarioLogadoView {
     while (escolha != 3) {
       System.out.println("******MENU PRINCIPAL - PROPRIETÁRIO******");
       System.out.println("1 - Denúncias");
-      System.out.println("2 - Visualizar casos");
+      System.out.println("2 - Visualizar casos de cada bairro");
       System.out.println("3 - Sair da conta");
       System.out.print("Escolha uma das opções acima: ");
       escolha = scanner.nextInt();
@@ -94,7 +94,7 @@ public class ProprietarioLogadoView {
           exibirMenuDeDenuncias();
           break;
         case 2:
-          // login();
+          bairroController.mostrarQuantidadeDeCasosDeCadaBairro();
           break;
         case 3:
           break;
