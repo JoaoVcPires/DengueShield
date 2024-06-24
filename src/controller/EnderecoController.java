@@ -13,12 +13,24 @@ public class EnderecoController {
     enderecoDAO = new EnderecoDAO();
   }
 
+  public Endereco buscarEnderecoPorIdEndereco(int idEndereco) {
+    return enderecoDAO.buscarEnderecoPorIdEndereco(idEndereco);
+  }
+
+  public Endereco buscarEnderecoPorIdEnderecoEIdBairro(int idEnderecoEscolhido, int idBairroDoAgente) {
+    return enderecoDAO.buscarEnderecoPorIdEnderecoEIdBairro(idEnderecoEscolhido, idBairroDoAgente);
+  }
+
   public boolean validarDadosDoEndereco(Endereco endereco) {
     bairroController = new BairroController();
-    // Validar logradouro e numCasa
 
     if (!bairroController.validarBairroEscolhido(endereco.getIdBairro())) {
       System.out.println("Bairro escolhido inválido!");
+      return false;
+    }
+
+    if (endereco.getLogradouro().isBlank() || endereco.getLogradouro().length() < 5) {
+      System.out.println("Logradouro inválido!");
       return false;
     }
 

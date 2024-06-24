@@ -44,10 +44,20 @@ public class ProprietarioController {
   }
 
   public boolean validarDadosDoProprietario(Proprietario proprietario) {
-    // Validação dos dados
-
     if (!verificarSeNomeUsuarioEstaDisponivel(proprietario.getNomeUsuario())) {
       System.out.println("Nome de usuário indisponível!");
+      return false;
+    }
+    if (proprietario.getNome().length() < 3) {
+      System.out.println("Digite um nome com mais de 3 caracteres!");
+      return false;
+    }
+    if (proprietario.getSenha().length() <= 5) {
+      System.out.println("Digite uma senha com mais de 5 caracteres!");
+      return false;
+    }
+    if (proprietario.getCpf().replaceAll("[^\\d]", "").length() != 11) {
+      System.out.println("Digite um CPF válido!");
       return false;
     }
 
@@ -62,6 +72,7 @@ public class ProprietarioController {
       Endereco ultimoEnderecoCadastrado = enderecoController.buscarUltimoEnderecoCadastrado();
       proprietario.setIdEndereco(ultimoEnderecoCadastrado.getIdEndereco());
       proprietarioDAO.inserirProprietario(proprietario);
+      System.out.println("Cadastro realizado com sucesso!");
     }
   }
 }

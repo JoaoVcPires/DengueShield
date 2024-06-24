@@ -15,6 +15,63 @@ public class EnderecoDAO {
     connection = BD.getConnection();
   }
 
+  public Endereco buscarEnderecoPorIdEndereco(int idEnderecoEscolhido) {
+    String sql = "SELECT * FROM endereco WHERE idEndereco = ?";
+    Endereco endereco = null;
+
+    try {
+      preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setInt(1, idEnderecoEscolhido);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        int idEndereco = resultSet.getInt("idEndereco");
+        String logradouro = resultSet.getString("logradouro");
+        int numCasa = resultSet.getInt("numCasa");
+        boolean focoDengue = resultSet.getInt("focoDengue") == 1;
+        int idBairro = resultSet.getInt("idBairro");
+
+        endereco = new Endereco(idEndereco, logradouro, numCasa, idBairro, focoDengue);
+      }
+
+      preparedStatement.close();
+
+    } catch (SQLException error) {
+      System.out.println("Erro: " + error.getMessage());
+    }
+
+    return endereco;
+  }
+
+  public Endereco buscarEnderecoPorIdEnderecoEIdBairro(int idEnderecoEscolhido, int idBairroDoAgente) {
+    String sql = "SELECT * FROM endereco WHERE idEndereco = ? AND idBairro = ?";
+    Endereco endereco = null;
+
+    try {
+      preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setInt(1, idEnderecoEscolhido);
+      preparedStatement.setInt(2, idBairroDoAgente);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        int idEndereco = resultSet.getInt("idEndereco");
+        String logradouro = resultSet.getString("logradouro");
+        int numCasa = resultSet.getInt("numCasa");
+        boolean focoDengue = resultSet.getInt("focoDengue") == 1;
+        int idBairro = resultSet.getInt("idBairro");
+
+        endereco = new Endereco(idEndereco, logradouro, numCasa, idBairro, focoDengue);
+      }
+
+      preparedStatement.close();
+
+    } catch (SQLException error) {
+      System.out.println("Erro: " + error.getMessage());
+    }
+
+    return endereco;
+  }
+
   public ArrayList<Endereco> buscarListaDeEnderecoPorBairro(int idBairroEscolhido) {
     String sql = "SELECT * FROM endereco WHERE idBairro = ?";
     listaEnderecos = new ArrayList<>();

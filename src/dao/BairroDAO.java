@@ -30,16 +30,9 @@ public class BairroDAO {
         int idBairro = resultSet.getInt("idBairro");
         String descricao = resultSet.getString("descricao");
         int casosTotal = resultSet.getInt("casosTotal");
-        int idAgente = resultSet.getInt("idAgente");
 
-        Bairro bairro = new Bairro(idBairro, descricao, casosTotal, idAgente);
+        Bairro bairro = new Bairro(idBairro, descricao, casosTotal);
         listaDeBairro.add(bairro);
-
-        // System.out.println("ID do Bairro: " + idBairro);
-        // System.out.println("Descrição: " + descricao);
-        // System.out.println("Casos Totatais: " + casosTotal);
-        // System.out.println("ID do Agente: " + idAgente);
-
       }
 
       preparedStatement.close();

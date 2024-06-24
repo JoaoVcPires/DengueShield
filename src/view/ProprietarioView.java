@@ -59,7 +59,6 @@ public class ProprietarioView {
       proprietarioLogadoView = new ProprietarioLogadoView(proprietario);
       proprietarioLogadoView.exibirMenuPrincipal();
     }
-
   }
 
   public void cadastroDeProprietario() {

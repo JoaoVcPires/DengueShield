@@ -3,7 +3,6 @@ package statusEnum;
 public class StatusDeDenuncia {
     public enum SelectStatus {
         PENDENTE("Pendente"),
-        EM_ANÁLISE("Em análise"),
         ARQUIVADA("Arquivada");
 
         private String descricao;
@@ -20,8 +19,6 @@ public class StatusDeDenuncia {
             switch (descricao) {
                 case "Pendente":
                     return SelectStatus.PENDENTE;
-                case "Em análise":
-                    return SelectStatus.EM_ANÁLISE;
                 case "Arquivada":
                     return SelectStatus.ARQUIVADA;
                 default:

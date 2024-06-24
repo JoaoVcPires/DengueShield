@@ -1,9 +1,11 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import connection.BD;
 import model.Caso;
+import model.InformacaoDetalhadaDeCaso;
 
 public class CasoDAO {
   private Connection connection;
@@ -16,10 +18,9 @@ public class CasoDAO {
   public void BuscarCasos() {
     String sql = "SELECT * FROM caso";
 
-    try { // preparando conecção
+    try {
       preparedStatement = connection.prepareStatement(sql);
       ResultSet resultSet = preparedStatement.executeQuery();
-      // buscando no banco de dados
       while (resultSet.next()) {
         int idCaso = resultSet.getInt("idcaso");
         String descricao = resultSet.getString("descricao");
@@ -49,7 +50,73 @@ public class CasoDAO {
 
       preparedStatement.close();
 
-      System.out.println("Agente salvo com sucesso!");
+      System.out.println("Caso cadastrado com sucesso!");
+    } catch (SQLException error) {
+      System.out.println("Erro: " + error.getMessage());
+    }
+  }
+
+  public ArrayList<InformacaoDetalhadaDeCaso> buscarListaDeCasos() {
+    String sql = "SELECT caso.idCaso, caso.descricao, endereco.logradouro, endereco.numCasa, bairro.descricao as bairro FROM caso, endereco, bairro WHERE caso.idEndereco = endereco.idEndereco AND endereco.idBairro = bairro.idBairro ORDER BY caso.idCaso DESC;";
+    ArrayList<InformacaoDetalhadaDeCaso> listaDeCasos = new ArrayList<>();
+
+    try {
+      preparedStatement = connection.prepareStatement(sql);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        int idCaso = resultSet.getInt("idcaso");
+        String descricao = resultSet.getString("descricao");
+        String logradouro = resultSet.getString("logradouro");
+        String bairroNome = resultSet.getString("bairro");
+        int numeroDaCasa = resultSet.getInt("numCasa");
+
+        InformacaoDetalhadaDeCaso informacaoDetalhadaDeCaso = new InformacaoDetalhadaDeCaso(idCaso, descricao,
+            logradouro, bairroNome, numeroDaCasa);
+        listaDeCasos.add(informacaoDetalhadaDeCaso);
+      }
+      preparedStatement.close();
+    } catch (SQLException e) {
+      System.out.println((" Error:" + e.getMessage()));
+    }
+
+    return listaDeCasos;
+  }
+
+  public int realizarContagemDeCasosDeUmBairro(int idBairro) {
+    String sql = "SELECT count(idCaso) as quantidadeDeCasos FROM caso, endereco WHERE endereco.idBairro = ? AND caso.idEndereco = endereco.idEndereco;";
+    int quantidadeDeCasos = 0;
+
+    try {
+      preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setInt(1, idBairro);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        quantidadeDeCasos = resultSet.getInt("quantidadeDeCasos");
+      }
+      preparedStatement.close();
+    } catch (SQLException e) {
+      System.out.println((" Error:" + e.getMessage()));
+    }
+
+    return quantidadeDeCasos;
+  }
+
+  public void atualizarQuantidadeDeCasosTotalNoBairro(int idBairro) {
+    String sql = "UPDATE bairro SET casosTotal = ? WHERE idBairro = ?";
+
+    int quantidadeDeCasos = realizarContagemDeCasosDeUmBairro(idBairro);
+
+    try {
+      preparedStatement = connection.prepareStatement(sql);
+
+      preparedStatement.setInt(1, quantidadeDeCasos);
+      preparedStatement.setInt(2, idBairro);
+
+      preparedStatement.execute();
+
+      preparedStatement.close();
     } catch (SQLException error) {
       System.out.println("Erro: " + error.getMessage());
     }

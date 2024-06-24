@@ -1,6 +1,7 @@
 package controller;
 
 import dao.AgenteDAO;
+import model.Agente;
 
 public class AgenteController {
   AgenteDAO agenteDAO;
@@ -9,8 +10,12 @@ public class AgenteController {
     agenteDAO = new AgenteDAO();
   }
 
+  public Agente buscarAgentePorUsuarioESenha(String usuario, String senha) {
+    return agenteDAO.buscarAgenteParaValidarLogin(usuario, senha);
+  }
+
   public boolean validarLogin(String usuario, String senha) {
-    boolean loginInvalido = agenteDAO.buscarAgenteParaValidarLogin(usuario, senha) == null;
+    boolean loginInvalido = buscarAgentePorUsuarioESenha(usuario, senha) == null;
 
     if (loginInvalido) {
       System.out.println("Usuário ou senha inválidos!");
@@ -19,9 +24,13 @@ public class AgenteController {
     return true;
   }
 
-  public void realizarLogin(String usuario, String senha) {
+  public Agente realizarLogin(String usuario, String senha) {
     if (validarLogin(usuario, senha)) {
-      System.out.println("Seja Bem-vindo Agente " + usuario);
+      Agente agente = buscarAgentePorUsuarioESenha(usuario, senha);
+      System.out.println("Seja Bem-vindo Agente " + agente.getNome());
+      return agente;
     }
+
+    return null;
   }
 }

@@ -29,12 +29,14 @@ public class AgenteDAO {
         String nome = resultSet.getString("nomePessoa");
         String senha = resultSet.getString("senha");
         String CPF = resultSet.getString("CPF");
+        int idBairro = resultSet.getInt("idBairro");
 
         System.out.println("id: " + id);
         System.out.println("usuario: " + usuario);
         System.out.println("nome: " + nome);
         System.out.println("senha: " + senha);
         System.out.println("CPF: " + CPF);
+        System.out.println("idBairro: " + idBairro);
       }
 
       preparedStatement.close();
@@ -56,13 +58,14 @@ public class AgenteDAO {
       ResultSet resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
-        int id = resultSet.getInt("idAgente");
+        int idAgente = resultSet.getInt("idAgente");
         String usuario = resultSet.getString("nomeUsuario");
         String nome = resultSet.getString("nomePessoa");
         String senha = resultSet.getString("senha");
         String CPF = resultSet.getString("CPF");
+        int idBairro = resultSet.getInt("idBairro");
 
-        agente = new Agente(nome, CPF, usuario, senha, id);
+        agente = new Agente(nome, CPF, usuario, senha, idAgente, idBairro);
       }
 
       preparedStatement.close();

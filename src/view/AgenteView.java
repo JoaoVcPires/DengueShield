@@ -3,10 +3,12 @@ package view;
 import java.util.Scanner;
 
 import controller.AgenteController;
+import model.Agente;
 
 public class AgenteView {
   AgenteController agenteController;
   Scanner scanner;
+  AgenteLogadoView agenteLogadoView;
 
   public AgenteView() {
     agenteController = new AgenteController();
@@ -42,6 +44,11 @@ public class AgenteView {
     System.out.print("Senha: ");
     String senha = scanner.next();
 
-    agenteController.realizarLogin(usuario, senha);
+    Agente agenteLogado = agenteController.realizarLogin(usuario, senha);
+
+    if (agenteLogado != null) {
+      agenteLogadoView = new AgenteLogadoView(agenteLogado);
+      agenteLogadoView.exibirMenuPrincipal();
+    }
   }
 }
